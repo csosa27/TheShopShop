@@ -1,11 +1,12 @@
-import Keys from '../../constants/Keys';
+import Api from '../../constants/APIs';
 export const SIGNUP = 'SIGNUP';
 
 export const signup = (email, password) => {
     return async dispatch => {
-        const apiKey = Keys.apiKey;
+        const apiKey = Api.apiKey;
+        const signupApi = Api.signupApi;
         const response = await fetch(
-            `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${apiKey}`,
+            signupApi+apiKey,
             {
                 method: 'POST',
                 headers: {
