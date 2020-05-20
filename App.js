@@ -4,14 +4,18 @@ import { Provider } from 'react-redux';
 import { AppLoading } from 'expo';
 import * as Font from 'expo-font';
 import ReduxThunk from 'redux-thunk';
-
 //import { composeWithDevTools } from 'redux-devtools-extension';
 
 import productReducer from './store/reducers/products';
 import cartReducer from './store/reducers/cart';
 import ordersReducer from './store/reducers/orders';
 import authReducer from './store/reducers/auth';
-import ShopNavigator from './navigation/ShopNavigator';
+import NavigationContainer from './navigation/NavigationContainer';
+
+import { YellowBox } from "react-native";
+
+
+
 
 const rootReducer = combineReducers ({
   products: productReducer,
@@ -30,8 +34,10 @@ const fetchFonts = () => {
 };
 
 export default function App() {
+  
   const [fontLoaded, setFontLoaded] = useState(false);
 
+  YellowBox.ignoreWarnings(["Setting a timer"]);
   if(!fontLoaded){
     return (
       <AppLoading 
@@ -45,7 +51,7 @@ export default function App() {
 
   return (
     <Provider store={store}>
-      <ShopNavigator />
+      <NavigationContainer />
     </Provider>
   );
 };
