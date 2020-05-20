@@ -29,6 +29,14 @@ const OrderScreen = props => {
         
     }
 
+    if(orders.length === 0){
+        return (
+            <View style={styles.centered}>
+                <Text>No products found, maybe start ordering some products?</Text>
+            </View>
+        );
+    }
+
     return (
         <FlatList 
             data={orders} 
