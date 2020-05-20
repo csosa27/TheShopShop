@@ -16,7 +16,7 @@ export const authenticate = (userId, token, expiryTime) => {
 export const signup = (email, password) => {
     return async dispatch => {
         const apiKey = Api.apiKey;
-        const signupApi = Api.signupApi;
+        const signupApi = Api.auth.signupApi;
         const response = await fetch(
             signupApi+apiKey,
             {
@@ -61,7 +61,7 @@ export const signup = (email, password) => {
 export const login = (email, password) => {
     return async dispatch => {
         const apiKey = Api.apiKey;
-        const loginApi = Api.loginApi;
+        const loginApi = Api.auth.loginApi;
         const response = await fetch(
             loginApi+apiKey,
             {

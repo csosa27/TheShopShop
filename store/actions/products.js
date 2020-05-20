@@ -1,16 +1,20 @@
 import Product from '../../models/product';
+import Api from '../../constants/APIs';
 
 export const DELETE_PRODUCT = 'DELETE_PRODUCT';
 export const CREATE_PRODUCT = 'CREATE_PRODUCT';
 export const UPDATE_PRODUCT = 'UPDATE_PRODUCT';
 export const SET_PRODUCTS = 'SET_PRODUCTS';
 
+const apiUrl = Api.shopshopDb
+
 export const fetchProducts = () => {
     return async (dispatch, getState) => {
         const userId = getState().auth.userId;
+        
         // Any async code you want: 
         try {
-            const response = await fetch('https://shop-shop-c2052.firebaseio.com/products.json');
+            const response = await fetch(`${apiUrl}/products.json`);
 
             if(!response.ok) {
                 throw new Error('Something went wrong!');
@@ -48,7 +52,7 @@ export const deleteProduct = productId => {
         
         const token = getState().auth.token;
         const response = await fetch(
-            `https://shop-shop-c2052.firebaseio.com/products/${productId}.json?auth=${token}`, 
+            `${apiUrl}/products/${productId}.json?auth=${token}`, 
             {
                 method: 'DELETE'
             }
@@ -69,7 +73,7 @@ export const createProduct = (title, description, imageUrl, price) => {
         const userId = getState().auth.userId;
         // Any async code you want: 
         const response = await fetch(
-            `https://shop-shop-c2052.firebaseio.com/products.json?auth=${token}`, 
+            `${apiUrl}/products.json?auth=${token}`, 
             {
                 method: 'POST',
                 headers: {
@@ -113,7 +117,7 @@ export const updateProduct = (id, title, description, imageUrl) => {
         const token = getState().auth.token;
         // Any async code you want: 
         const response = await fetch(
-            `https://shop-shop-c2052.firebaseio.com/products/${id}.json?auth=${token}`, 
+            `${apiUrl}/products.json?auth=${token}`, 
             {
                 method: 'PATCH',
                 headers: {

@@ -1,13 +1,15 @@
 import Order from '../../models/order';
+import Api from '../../constants/APIs';
 
 export const ADD_ORDER = 'ADD_ORDER';
 export const SET_ORDERS = 'SET_ORDERS';
 
+const apiUrl = Api.shopshopDb;
 export const fetchOrders = () => {
     return async (dispatch, getState) => {
         const userId = getState().auth.userId;
         try {
-            const response = await fetch(`https://shop-shop-c2052.firebaseio.com/orders/${userId}.json`);
+            const response = await fetch(`${apiUrl}/orders/${userId}.json`);
 
             if(!response.ok) {
                 throw new Error('Something went wrong!');
@@ -41,9 +43,10 @@ export const addOrder = (cartItems, totalAmount) => {
         const date = new Date();
         const token = getState().auth.token;
         const userId = getState().auth.userId;
+
         // Any async code you want: 
         const response = await fetch(
-            `https://shop-shop-c2052.firebaseio.com/orders/${userId}.json?auth=${token}`, 
+            `${apiUrl}/orders/${userId}.json?auth=${token}`, 
             {
                 method: 'POST',
                 headers: {
